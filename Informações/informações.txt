@@ -1,0 +1,103 @@
+# 📋 SISPROT — Sistema de Protocolo Eletrônico
+
+> **Decisão de 28/06/2026:** Projeto substituído. O plano anterior (compartilhador de fotos) foi abandonado em favor de um sistema mais alinhado ao cargo da UFCA.
+
+## Contexto da Decisão
+
+O projeto foi repensado para atender diretamente às competências do cargo de **Analista de TI / Arquitetura e Desenvolvimento de Sistemas – Back-End da UFCA**. 
+Um sistema de protocolo eletrônico é o tipo de sistema mais comum em instituições federais e cobre TODOS os conceitos de back-end que o cargo exige.
+
+## Stack Final
+
+Java 17+ · Spring Boot 3 · PostgreSQL · Docker · Spring Security + JWT · Redis · RabbitMQ · JUnit 5 + Mockito + Testcontainers · Maven · Git
+
+## Metodologia
+
+- **Modo Tutor:** Eu implemento manualmente, a IA explica e revisa (Fases 0-4)
+- **Modo Comando:** Eu dou instruções específicas, a IA gera código (Fases 5+)
+- **Sessões:** Máximo 1 hora por dia, com alarme
+- **Plano completo:** Ver `plano-estudo.md` na memória do repositório
+- **Resumo do projeto:** Ver `PROJETO.md`
+    *   **Endpoint de Upload:** Modifique o *endpoint* `POST /fotos` para receber o arquivo de imagem (multipart/form-data).
+    *   **Extrator EXIF:** Utilize uma biblioteca Java para ler os metadados da imagem. A mais comum é a **`metadata-extractor`**.
+    *   **Lógica de Extração:** No backend, ao receber a imagem, você vai:
+        1.  Ler os metadados EXIF.
+        2.  Extrair as tags `GPSLatitude` e `GPSLongitude`.
+        3.  Converter o valor de Graus, Minutos, Segundos para Graus Decimais.
+        4.  Salvar no banco de dados as coordenadas e o caminho onde a imagem foi armazenada.
+*   **Armazenamento de Imagens:**
+    *   Decida onde salvar os arquivos das fotos. Para começar, pode ser em uma pasta no próprio servidor. Em um cenário real, você usaria um serviço de armazenamento em nuvem (como Amazon S3).
+*   **Tecnologias-chave:** Spring Web (upload de arquivos), `metadata-extractor`.
+
+#### Fase 3: A Experiência Mobile - Compartilhar do Celular 📱
+Para atingir seu objetivo de compartilhar diretamente do celular, você tem dois caminhos. O mais alinhado com o back-end e o foco em Java (para o concurso) é criar um app Android nativo.
+
+*   **App Android (Nativo em Java/Kotlin):**
+    1.  **Configurar o `AndroidManifest.xml`:** Declare um `IntentFilter` para que seu app apareça como opção ao compartilhar uma imagem. Ele deve escutar pela ação `ACTION_SEND` e tipo MIME `image/*`.
+    2.  **Activity Receptora:** Crie uma `Activity` que será iniciada quando o usuário escolher seu app. Ela receberá a imagem através do `Intent`.
+    3.  **Envio para o Backend:** Dentro dessa `Activity`, pegue o arquivo da imagem, e faça uma requisição HTTP (usando bibliotecas como **Retrofit** ou **OkHttp**) para o *endpoint* de upload que você criou na Fase 2.
+    4.  **Feedback ao Usuário:** Após o upload, mostre uma mensagem de sucesso ou erro para o usuário.
+
+*   **Alternativa (PWA - Progressive Web App):** Se preferir não desenvolver um app nativo, você pode criar um site responsivo que, no celular, pode ser adicionado à tela inicial. O usuário abriria o site, faria o upload da foto manualmente. É mais simples, mas não oferece a experiência de "compartilhar diretamente da galeria".
+*   **Tecnologias-chave:** Android SDK, Java/Kotlin, Retrofit/OkHttp, conhecimento sobre Intents no Android.
+
+#### Fase 4: Funcionalidades Sociais - "Pontos Importantes" e Compartilhamento 👥
+Agora que a base está pronta, vamos adicionar a camada social que você mencionou.
+
+*   **Backend:**
+    *   **Modelo de Dados (Expansão):** Crie uma nova entidade `PontoImportante` que pode estar associada a uma ou mais fotos. Adicione campos como `titulo`, `descricao`, `categoria` (ex: "Viagem", "Aniversário").
+    *   **Novos Endpoints:** Crie APIs para gerenciar esses pontos (CRUD - Criar, Ler, Atualizar, Deletar).
+    *   **Sistema de Usuários (Opcional, mas poderoso):** Implemente autenticação e autorização com **Spring Security** e **JWT**. Assim, cada amigo pode ter sua própria conta e seus próprios pontos.
+*   **Frontend Web:**
+    *   Adicione um botão "Adicionar Ponto Importante" no mapa.
+    *   Crie um formulário que, ao ser submetido, chama a nova API do backend.
+    *   Diferencie visualmente os marcadores de fotos dos marcadores de pontos importantes no mapa.
+*   **Tecnologias-chave:** Spring Security, JWT, relacionamentos JPA (OneToMany, ManyToOne).
+
+#### Fase 5: Qualidade e Confiabilidade - Testes e Documentação 🧪
+Um diferencial de um profissional é a preocupação com a qualidade do software.
+
+*   **Testes:**
+    *   **Testes Unitários:** Aprenda a usar **JUnit** e **Mockito** para testar suas classes de serviço e repositórios isoladamente.
+    *   **Testes de Integração:** Teste a comunicação entre suas camadas (Controller -> Service -> Repository).
+    *   **Testes de API:** Use ferramentas como **Postman** ou **Insomnia** para testar seus *endpoints* manualmente e, depois, automatize esses testes.
+*   **Documentação:**
+    *   **Documentação da API:** Implemente a documentação interativa da sua API usando **SpringDoc OpenAPI** (antigo Swagger). Isso é um requisito comum em equipes de desenvolvimento.
+*   **Tecnologias-chave:** JUnit, Mockito, SpringDoc OpenAPI, Postman.
+
+#### Fase 6: Publicação e Monitoramento - "Colocar em Produção" 🚀
+Chegou a hora de colocar o sistema no ar para seus amigos usarem.
+
+*   **Deploy do Backend:**
+    *   **Opção 1 (Mais simples):** Use um serviço de nuvem como **Heroku**, **Render** ou **Fly.io**. Eles têm planos gratuitos e são fáceis de configurar para aplicações Spring Boot.
+    *   **Opção 2 (Mais robusta):** Configure uma **VPS (Virtual Private Server)** na **AWS**, **Google Cloud** ou **Digital Ocean**. Isso te dará um aprendizado muito valioso sobre administração de servidores Linux.
+*   **Deploy do Banco de Dados:** Você pode usar o mesmo serviço de nuvem para hospedar seu PostgreSQL ou usar um serviço especializado como **Supabase** ou **ElephantSQL** (que tem plano gratuito).
+*   **Monitoramento (Opcional, mas recomendado):** Integre uma ferramenta como **Sentry** para capturar erros em produção ou **Prometheus** e **Grafana** para monitorar a saúde do sistema.
+
+---
+
+### 🔧 Resumo das Tecnologias Sugeridas
+
+Para te ajudar a visualizar, aqui está um resumo das principais ferramentas que você pode usar, alinhadas com o que é valorizado no mercado e no serviço público:
+
+| Categoria | Tecnologia Sugerida | Motivação |
+| :--- | :--- | :--- |
+| **Linguagem Backend** | **Java** | É a linguagem mais consolidada e requisitada para sistemas críticos no serviço público. |
+| **Framework Backend** | **Spring Boot** | Acelera o desenvolvimento e é o padrão de facto para aplicações Java modernas. |
+| **Banco de Dados** | **PostgreSQL** | Banco relacional robusto, com suporte a dados geoespaciais (com extensão PostGIS), ideal para seu projeto. |
+| **Frontend Web (Mapa)** | **Leaflet + OpenStreetMap** | Biblioteca open-source leve e gratuita para mapas interativos, sem custos de API. |
+| **App Mobile (Android)** | **Android SDK (Java/Kotlin)** | Permite a integração nativa com o sistema de *share* do Android. |
+| **Controle de Versão**| **Git + GitHub** | Essencial para qualquer profissional de TI. |
+| **Documentação API** | **SpringDoc OpenAPI** | Padrão de mercado para documentar APIs REST. |
+
+---
+
+### 💎 Dicas Finais para a Jornada
+
+1.  **Comece pequeno, mas comece:** Não tente abraçar o mundo de uma vez. Concluir a Fase 1 e ver seu primeiro marcador no mapa vai te dar um *boost* de motivação gigantesco.
+2.  **Documente sua evolução:** Escreva um `README.md` no seu repositório contando o que você aprendeu em cada fase. Isso é um ótimo portfólio.
+3.  **Pense como um Arquiteto:** Ao invés de só fazer funcionar, pergunte-se: "Como eu posso fazer isso de forma mais organizada? E se o sistema crescer, essa estrutura vai aguentar?". Essa mentalidade é o que diferencia um desenvolvedor de um arquiteto de software.
+
+Este plano é o seu roteiro. Se em algum momento surgir uma dúvida técnica específica (sobre como extrair o EXIF, configurar o Spring Security, ou criar o `IntentFilter` no Android), pode me chamar. Vamos trabalhar nisso juntos, com a IA como sua tutora, exatamente como você planejou.
+
+Bons estudos e ótimo projeto!

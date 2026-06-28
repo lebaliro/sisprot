@@ -1,0 +1,27 @@
+services:
+  postgres-16:
+    image: postgres:16
+    container_name: sisprot_db
+    environment:
+      POSTGRES_USER: sisprot
+      POSTGRES_PASSWORD: sisprot
+      POSTGRES_DB: sisprot
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:                          
+    build: .                    
+    container_name: sisprot_app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://sisprot_db:5432/sisprot
+      SPRING_DATASOURCE_USERNAME: sisprot
+      SPRING_DATASOURCE_PASSWORD: sisprot
+    depends_on:
+      - postgres-16
+
+volumes:
+  postgres_data:
