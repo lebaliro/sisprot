@@ -52,6 +52,31 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 | **10** | Mensageria com RabbitMQ | Spring AMQP, DLQ, eventos assíncronos |
 | **11** | Deploy e CI/CD | Dockerfile multi-stage, GitHub Actions |
 | **12** | Bônus — Microsserviços | Service Discovery, API Gateway |
+| **13** | Bônus — Interface Web | Thymeleaf, Bootstrap, templates server-side (preparação para realidade do cargo) |
+
+---
+
+## ⚠️ Realidade do Cargo — Back-End + Interface
+
+> **Contexto:** Pesquisa informal confirmou que a UFCA **não tem cargo específico de frontend**.
+> Na prática, o analista back-end frequentemente precisa entregar interfaces funcionais.
+
+### O que isso significa para o projeto
+
+| Não é esperado | É esperado |
+|---|---|
+| Design sofisticado, Figma, UX research | Telas funcionais (tabela + formulário + CRUD) |
+| React/Vue/Angular avançado | Thymeleaf com Bootstrap (mesma stack Java) |
+| Acessibilidade, animações, responsividade | Interface administrativa interna simples |
+
+### Estratégia
+
+1. **Fases 1-11:** Foco total em back-end (core do cargo)
+2. **Fase 13 (opcional):** Thymeleaf + Bootstrap — adicionar camada web à mesma aplicação Spring Boot
+3. Thymeleaf é escolha natural: roda no servidor, mesma stack, curva baixa para quem já sabe Java
+
+> 🎯 O domínio do back-end é o diferencial. Telas funcionais se aprendem em dias.
+> Mas estar preparado para entregar ambas as pontas é a realidade do serviço público federal.
 
 ---
 
@@ -188,8 +213,8 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 
 | Fase | Status | Início | Conclusão |
 |---|---|---|---|
-| Fase 0: Ambiente | � Em andamento | 28/06/2026 | — |
-| Fase 1: MVP | 🔴 Não iniciada | — | — |
+| Fase 0: Ambiente | 🟢 Concluída | 28/06/2026 | 28/06/2026 |
+| Fase 1: MVP | 🟡 Em andamento | 28/06/2026 | — |
 | Fase 2: Processamento | 🔴 Não iniciada | — | — |
 | Fase 3: Mobile | 🔴 Não iniciada | — | — |
 | Fase 4: Social | 🔴 Não iniciada | — | — |
@@ -208,6 +233,8 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 |---|---|---|---|---|
 | 1 | 2026-06-27 | PostgreSQL rodando em container Docker | Ambiente isolado, evita instalar dependências direto no Windows, reproduzível com um comando, aprendizado de Docker já na Fase 0 | Instalação nativa do PostgreSQL no Windows |
 | 2 | 2026-06-27 | VS Code como IDE principal (com extensões Java + Spring) | Já está usando, mais leve que IntelliJ IDEA, aprendizado mais explícito | IntelliJ IDEA, Spring Tool Suite |
+| 3 | 2026-06-28 | Dockerfile multi-stage (Maven build + JRE runtime) | Imagem final mais leve (~200MB vs ~500MB), separa responsabilidades de build e execução, padrão de mercado para apps Spring Boot | Dockerfile single-stage com JDK completo, build local + copy do jar |
+| 4 | 2026-06-28 | Thymeleaf como camada web (Fase 13) | Mesma stack Java, baixa curva de aprendizado, ideal para sistemas administrativos internos. Preparação para realidade de IFES onde não há cargo dedicado de frontend | React, Angular, Vue (overkill para sistemas internos simples) |
 
 ---
 

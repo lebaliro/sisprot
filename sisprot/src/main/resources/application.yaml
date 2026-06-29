@@ -1,6 +1,9 @@
 spring:
   application:
     name: sisprot
+  sql:
+    init:
+      mode: always
   datasource:
     url: jdbc:postgresql://localhost:5432/sisprot
     username: sisprot
