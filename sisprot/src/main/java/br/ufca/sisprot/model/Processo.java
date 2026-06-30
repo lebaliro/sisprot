@@ -1,11 +1,17 @@
 package br.ufca.sisprot.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data // Gera getters, setters, toString, equals, hashCode
 @NoArgsConstructor // Construtor vazio (exigido pelo JPA)
@@ -35,4 +41,11 @@ public class Processo {
 
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
+
+    @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
+    @JsonIgnore // Evita loop infinito na serialização JSON
+    @ToString.Exclude // Evita loop infinito no toString
+    @EqualsAndHashCode.Exclude // Evita loop infinito no equals/hashCode
+    private Set<Movimentacao> movimentacoes = new HashSet<>();
+
 }

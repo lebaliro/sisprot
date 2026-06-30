@@ -150,3 +150,39 @@
 - Testar paginação com `?page=1&size=5&sort=titulo,asc`
 - Iniciar **Fase 2: Relacionamentos e Validações** — criar entidades relacionadas (ex: Movimentação, Usuário)
 - Git commit do progresso atual
+
+### Sessão 05 — 30/06/2026 — Fase 2: Relacionamentos e Validações (início)
+
+**Tempo:** ~55min
+
+**O que fiz:**
+- Adicionado handler `MethodArgumentNotValidException` no `GlobalExceptionHandler` (Opção B: mapa campo → mensagem, retorno 400)
+- Testada validação com POST inválido — ✅ resposta 400 com erros por campo
+- Testada paginação — ✅ page=0/1, size=3, sort=titulo,asc
+- Criada entidade `Movimentacao` com `@ManyToOne` → `Processo` (bidirecional)
+- Atualizado `Processo` com `@OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)`
+- Criado `schema.sql` para tabela `movimentacoes`
+- Criados `MovimentacaoRepository`, `MovimentacaoService`, `MovimentacaoController`
+- Criados DTOs: `MovimentacaoRequestDTO` (com Bean Validation) e `MovimentacaoResponseDTO`
+- Criada exceção `MovimentacaoNaoEncontradaException`
+- Lidado com StackOverflowError: `@JsonIgnore` + `@ToString.Exclude` + `@EqualsAndHashCode.Exclude` em relações bidirecionais
+- Testados endpoints de movimentação — ✅ criar, listar por processo, buscar por id, 404, validação 400
+- Adicionada dica de teste curl no `AI-INSTRUCOES.md` (`curl.exe --%`)
+
+**O que aprendi:**
+- `@OneToMany` unidirecional com `NOT NULL` na FK causa erro — JPA insere filho primeiro, depois atualiza FK
+- Bidirecional (`@ManyToOne` no filho + `mappedBy`) resolve: JPA já insere com FK
+- `@Data` do Lombok em relações bidirecionais exige: `@JsonIgnore` (JSON), `@ToString.Exclude` (toString), `@EqualsAndHashCode.Exclude` (hashCode) — senão StackOverflow nos 3 lugares
+- `@JoinColumn` diz onde está a FK; `mappedBy` diz que o outro lado é o dono da relação
+- Diferença entre `FetchType.LAZY` (carrega sob demanda) e `EAGER` (carrega sempre)
+- O erro `curl.exe` no PowerShell com `--%` para evitar parsing das aspas
+
+**Dúvidas que surgiram:**
+- **`id: null` na resposta do POST de Movimentação** — investigar na próxima sessão
+- **ConstraintValidator** — Fase 2 ainda tem validação customizada pendente
+
+**Próxima sessão:**
+- Investigar `id: null` no POST de Movimentação (problema de flush com IDENTITY?)
+- Implementar ConstraintValidator (validação customizada — ex: setorDestino != setorOrigem, data não no futuro)
+- Git commit do progresso atual
+- Revisar e consolidar aprendizado da Fase 2

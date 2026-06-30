@@ -23,6 +23,18 @@
 
 ## Dúvidas
 
+### 30/06/2026 — id: null na resposta do POST de Movimentação
+
+**Contexto:** Criando uma movimentação (POST /api/processos/{id}/movimentacoes). A resposta retorna o objeto criado, mas o campo `id` vem `null`. Porém ao listar (GET), o `id` aparece corretamente.
+
+**Dúvida:** Por que o `id` aparece `null` na resposta do POST se o dado foi salvo no banco? É problema de flush do JPA com CascadeType.ALL e IDENTITY generation?
+
+**Resposta:** (pendente)
+
+**Aprendizado:** (pendente)
+
+---
+
 ### 28/06/2026 — Cargo back-end absorve frontend na UFCA?
 
 **Contexto:** Pesquisando sobre o cargo de Analista de TI / Back-End da UFCA.
