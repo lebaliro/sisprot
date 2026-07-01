@@ -234,3 +234,24 @@
 
 **Próxima sessão:**
 - Iniciar **Semana 1: Java Core + Clean Code** — revisar classes do SISPROT no Modo Revisão
+
+### Sessão 08 — 01/07/2026 — ⚡ Fundamentos: Semana 1 (Java Core + Clean Code)
+
+**Tempo:** ~45min
+
+**O que fiz:**
+- Atualizado `AI-INSTRUCOES.md` — Modo Revisão agora segue 5 níveis top-down com aluno falando primeiro
+- Revisado `Processo.java`: arquitetura em camadas, encapsulamento, `Long` vs `long`, `Set` vs `List`, Lombok, Jakarta
+- Revisado `Movimentacao.java`: `@ManyToOne` vs `@OneToMany`, Interface vs Implementação, Lazy Loading, fluxo POST
+
+**O que aprendi:**
+- Java é baseado em programar para interface (`Set` = contrato, `HashSet` = mecanismo)
+- `FetchType.LAZY` cria proxy que busca do banco no primeiro acesso — exige transação aberta
+- DTOs existem por 4 motivos: transação, segurança, desacoplamento, formatação
+- `@Data` gera código em compilação; `FetchType` controla acesso ao banco; são coisas diferentes
+
+**Dúvidas que surgiram:**
+- Nenhuma
+
+**Próxima sessão:**
+- Continuar Semana 1: `ProcessoRepository`, `MovimentacaoRepository`, `ProcessoService`, `MovimentacaoService`

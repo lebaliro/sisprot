@@ -41,6 +41,7 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 |---|---|---|
 | **0** | Fundação — Ambiente | Docker, Spring Boot anatomy, Maven |
 | **1** | CRUD de Processos | JPA, Repository, Service, Controller, DTO, paginação |
+| **1.5** | Consumo de APIs Externas | RestTemplate, WebClient, timeout, retry, tratamento de erros |
 | **2** | Relacionamentos e Validações | @OneToMany, Bean Validation, ConstraintValidator |
 | **⚡** | **Fundamentos de Engenharia** | Java Core, Clean Code, SOLID, Design Patterns, Testes, Refatoração |
 | **3** | Autenticação e Autorização | Spring Security, JWT, BCrypt, RBAC |
@@ -48,6 +49,7 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 | **5** | Workflow — Máquina de Estados | State Machine, transições, regras de negócio |
 | **6** | Busca Avançada e Filtros | JPQL, Criteria API, Specification Pattern |
 | **7** | Cache e Performance | Redis, @Cacheable, índices PostgreSQL |
+| **7.5** | Observabilidade | Logs estruturados (SLF4J), Spring Actuator, health checks, métricas |
 | **8** | Testes Automatizados | JUnit, Mockito, Testcontainers, JaCoCo |
 | **9** | Documentação da API | OpenAPI, Swagger, SpringDoc |
 | **10** | Mensageria com RabbitMQ | Spring AMQP, DLQ, eventos assíncronos |
@@ -144,6 +146,7 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 |---|---|---|---|
 | Fase 0: Fundação — Ambiente | 🟢 Concluída | 28/06/2026 | 28/06/2026 |
 | Fase 1: CRUD de Processos | 🟢 Concluída | 28/06/2026 | 29/06/2026 |
+| Fase 1.5: Consumo de APIs Externas | 🔴 Não iniciada | — | — |
 | Fase 2: Relacionamentos e Validações | 🟢 Concluída | 28/06/2026 | 30/06/2026 |
 | ⚡ Fundamentos: Engenharia de Software | 🟡 Em andamento | 01/07/2026 | — |
 | Fase 3: Autenticação e Autorização | 🔴 Não iniciada | — | — |
@@ -151,6 +154,7 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 | Fase 5: Workflow — Máquina de Estados | 🔴 Não iniciada | — | — |
 | Fase 6: Busca Avançada e Filtros | 🔴 Não iniciada | — | — |
 | Fase 7: Cache e Performance | 🔴 Não iniciada | — | — |
+| Fase 7.5: Observabilidade | 🔴 Não iniciada | — | — |
 | Fase 8: Testes Automatizados | 🔴 Não iniciada | — | — |
 | Fase 9: Documentação da API | 🔴 Não iniciada | — | — |
 | Fase 10: Mensageria com RabbitMQ | 🔴 Não iniciada | — | — |
