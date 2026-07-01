@@ -186,3 +186,51 @@
 - Implementar ConstraintValidator (validação customizada — ex: setorDestino != setorOrigem, data não no futuro)
 - Git commit do progresso atual
 - Revisar e consolidar aprendizado da Fase 2
+
+### Sessão 06 — 30/06/2026 — Fase 2: Relacionamentos e Validações (conclusão)
+
+**Tempo:** ~35min
+
+**O que fiz:**
+- Investigado e resolvido `id: null` no POST de Movimentação — trocado cascade por `save` explícito no `MovimentacaoRepository`
+- Removido `CascadeType.ALL` do `Processo.java` (responsabilidade explícita de salvar fica no Service)
+- Implementado `@DataNaoFutura` — ConstraintValidator de campo: valida que data não é no futuro
+- Implementado `@SetoresDiferentes` — ConstraintValidator de classe: valida que setorOrigem ≠ setorDestino
+- Atualizado `GlobalExceptionHandler` para capturar também `globalErrors` (validações de classe)
+- Testados todos os cenários: data futura, setores iguais, combinação com validações padrão
+- Atualizado `DUVIDAS.md` com resposta do `id: null`
+
+**O que aprendi:**
+- `cascade` + IDENTITY pode causar `id: null` — salvar filho explicitamente (`repository.save(filho)`) é mais previsível
+- ConstraintValidator tem dois tipos: `FIELD` (anotação no campo) e `TYPE` (anotação na classe)
+- Validação de classe (`@Target(ElementType.TYPE)`) permite comparar campos entre si — impossível com anotações de campo
+- `BindingResult.getGlobalErrors()` captura erros de validação de classe (sem campo associado)
+- `ConstraintValidatorContext` pode ser usado para customizar mensagens — não precisamos, mas existe
+
+**Dúvidas que surgiram:**
+- Nenhuma nova
+
+**Próxima sessão:**
+- Fase 2 concluída ✅ — iniciar **Fundamentos de Engenharia de Software** (Semana 1: Java Core + Clean Code)
+- Git commit do progresso atual
+
+### Sessão 07 — 01/07/2026 — Planejamento: Fundamentos de Engenharia
+
+**Tempo:** ~30min
+
+**O que fiz:**
+- Identificada necessidade de estudar fundamentos de Java, design e arquitetura antes da Fase 3 (Spring Security)
+- Definido plano de 3 semanas de fundamentos usando o SISPROT como laboratório
+- Criado **Modo Revisão** no `AI-INSTRUCOES.md` — protocolo para revisar código classe por classe
+- Atualizado `PROJETO.md` com a fase ⚡ Fundamentos de Engenharia entre Fase 2 e 3
+- Decidido: Prompt Engineering fica para projeto separado
+
+**O que aprendi:**
+- O SISPROT já contém exemplos práticos de Service Layer, Repository Pattern, DTO, ConstraintValidator, Exceptions customizadas — agora é hora de entender os "porquês"
+- Modo Revisão é diferente do Tutor: não gera código, foca em análise e entendimento
+
+**Dúvidas que surgiram:**
+- Nenhuma
+
+**Próxima sessão:**
+- Iniciar **Semana 1: Java Core + Clean Code** — revisar classes do SISPROT no Modo Revisão

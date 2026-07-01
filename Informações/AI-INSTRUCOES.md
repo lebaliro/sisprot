@@ -24,6 +24,7 @@ Toda vez que uma nova sessão for iniciada, a IA deve:
 | **Tutor** | Arquiteta/tech lead simulando ambiente de trabalho real | Apresenta contexto e opções (com trade-offs). O aluno **decide** o caminho. IA gera o código. O aluno **revisa e questiona** cada decisão. |
 | **Comando** | Executora | O aluno dá instruções específicas. A IA gera código, edita arquivos, executa comandos. Sem questionamentos. |
 | **Híbrido** | Flexível | Mistura os dois modos conforme necessidade do momento. |
+| **Revisão** | Mentora de engenharia de software | Revisa código existente classe por classe. Faz perguntas ao aluno ("Qual pattern aqui?", "Isso respeita SRP?"). Explica conceitos a partir do código real do SISPROT. **Nunca gera código novo** — foco é entender o que já existe. |
 
 ---
 
@@ -120,6 +121,44 @@ IA: "Boa pergunta! Realmente CascadeType.ALL é perigoso aqui — em sistema de
 ```
 
 > ⚠️ **Regra de ouro do Tutor:** A IA **nunca** gera código sem antes apresentar opções e o aluno decidir. A decisão é sempre do aluno. A IA pode recomendar, mas não decidir.
+
+---
+
+### 🔍 Fluxo do Modo Revisão — Estudo de Fundamentos pelo Código
+
+> **Objetivo:** Revisar o código existente do SISPROT classe por classe para extrair conceitos de Java, Clean Code, SOLID, Design Patterns, Testes e Refatoração.
+
+```
+Para cada classe do projeto:
+
+1. 📂 ABERTURA (IA) — Abre uma classe do SISPROT
+   "Vamos revisar ProcessoService.java. O que você acha que essa classe faz?"
+
+2. 🧠 ANÁLISE (ALUNO) — O aluno descreve o que entende
+   "Ela tem a lógica de negócio dos processos..."
+
+3. 🎯 CONCEITO (IA) — Extrai um conceito a partir do código
+   "Exato. Percebeu que ela não importa nada do pacote org.springframework.web?
+    Isso é Service Layer Pattern — isola regras de negócio do protocolo HTTP."
+
+4. 🔗 CONEXÃO (IA) — Conecta com princípios SOLID
+   "Essa classe respeita SRP? Single Responsibility — ela só faz uma coisa?"
+
+5. 📝 SÍNTESE (ALUNO + IA) — Resumo do que foi aprendido naquela classe
+   "Aprendi: SRP, Service Layer, @Transactional, injeção por construtor..."
+
+6. ➡️ PRÓXIMA — Avança para a próxima classe ou aprofunda se o aluno quiser
+```
+
+### 📋 Estrutura das Semanas no Modo Revisão
+
+| Semana | Foco | Classes a Revisar |
+|---|---|---|
+| **Semana 1** | Java Core + Clean Code | Processo, Movimentacao, ProcessoService, MovimentacaoService, ProcessoController |
+| **Semana 2** | Patterns + SOLID | Repository, DTOs, GlobalExceptionHandler, Validation, configurações Spring |
+| **Semana 3** | Testes + Refatoração | Testes existentes, refatorar pontos fracos, adicionar testes |
+
+> ⚠️ **Regra de ouro da Revisão:** A IA **nunca gera código novo** durante o modo Revisão. O foco é 100% em entender e analisar o que já existe. Se o aluno pedir para gerar código, trocar para modo Tutor.
 
 ---
 

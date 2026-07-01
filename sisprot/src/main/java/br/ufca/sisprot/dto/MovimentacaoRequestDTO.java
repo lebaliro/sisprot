@@ -2,6 +2,8 @@ package br.ufca.sisprot.dto;
 
 import java.time.LocalDateTime;
 
+import br.ufca.sisprot.validation.DataNaoFutura;
+import br.ufca.sisprot.validation.SetoresDiferentes;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,9 +11,11 @@ import jakarta.validation.constraints.Size;
 /**
  * DTO de entrada para criação de uma movimentação.
  */
+@SetoresDiferentes
 public record MovimentacaoRequestDTO(
 
         @NotNull(message = "A data da movimentação é obrigatória")
+        @DataNaoFutura
         LocalDateTime dataMovimentacao,
 
         @NotBlank(message = "O setor de origem é obrigatório")

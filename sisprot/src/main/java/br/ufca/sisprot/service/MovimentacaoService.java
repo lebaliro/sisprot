@@ -45,15 +45,18 @@ public class MovimentacaoService {
                 .orElseThrow(() -> new ProcessoNaoEncontradoException(processoId));
 
         Movimentacao mov = new Movimentacao();
-        mov.setProcesso(processo);      // FK preenchida de cara
+        mov.setProcesso(processo);
         mov.setDataMovimentacao(dto.dataMovimentacao());
         mov.setSetorOrigem(dto.setorOrigem());
         mov.setSetorDestino(dto.setorDestino());
         mov.setDespacho(dto.despacho());
         mov.setUsuarioResponsavel(dto.usuarioResponsavel());
 
+        // Salva explicitamente — o save() retorna o objeto com ID populado
+        mov = movimentacaoRepository.save(mov);
+
+        // Mantém a coleção sincronizada (bidirecionalidade)
         processo.getMovimentacoes().add(mov);
-        processoRepository.save(processo);
 
         return toResponseDTO(mov);
     }

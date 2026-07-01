@@ -29,9 +29,12 @@
 
 **Dúvida:** Por que o `id` aparece `null` na resposta do POST se o dado foi salvo no banco? É problema de flush do JPA com CascadeType.ALL e IDENTITY generation?
 
-**Resposta:** (pendente)
+**Resposta:** O problema é do JPA com cascade + IDENTITY. Ao salvar via `processoRepository.save(processo)`, o cascade propaga para a Movimentacao, mas o ID gerado pelo banco não é populado no objeto original `mov` (comportamento do merge vs persist). A solução foi salvar a Movimentacao explicitamente: `mov = movimentacaoRepository.save(mov)` — o `save()` do Spring Data JPA retorna o objeto com o ID populado.
 
-**Aprendizado:** (pendente)
+**Aprendizado:**
+- Prefira salvar a entidade filha explicitamente (`repository.save(filho)`) em vez de depender de cascade do pai — fica mais claro e evita surpresas com ID
+- Com IDENTITY, o banco gera o ID no INSERT, e o Hibernate popula no objeto retornado pelo `save()`
+- Cascade é útil para operações em lote, mas para CRUD simples o explícito é mais seguro
 
 ---
 

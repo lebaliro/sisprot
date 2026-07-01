@@ -42,6 +42,7 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 | **0** | Fundação — Ambiente | Docker, Spring Boot anatomy, Maven |
 | **1** | CRUD de Processos | JPA, Repository, Service, Controller, DTO, paginação |
 | **2** | Relacionamentos e Validações | @OneToMany, Bean Validation, ConstraintValidator |
+| **⚡** | **Fundamentos de Engenharia** | Java Core, Clean Code, SOLID, Design Patterns, Testes, Refatoração |
 | **3** | Autenticação e Autorização | Spring Security, JWT, BCrypt, RBAC |
 | **4** | Upload de Documentos | Multipart upload, File Storage |
 | **5** | Workflow — Máquina de Estados | State Machine, transições, regras de negócio |
@@ -143,7 +144,8 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 |---|---|---|---|
 | Fase 0: Fundação — Ambiente | 🟢 Concluída | 28/06/2026 | 28/06/2026 |
 | Fase 1: CRUD de Processos | 🟢 Concluída | 28/06/2026 | 29/06/2026 |
-| Fase 2: Relacionamentos e Validações | 🔴 Não iniciada | — | — |
+| Fase 2: Relacionamentos e Validações | 🟢 Concluída | 28/06/2026 | 30/06/2026 |
+| ⚡ Fundamentos: Engenharia de Software | 🟡 Em andamento | 01/07/2026 | — |
 | Fase 3: Autenticação e Autorização | 🔴 Não iniciada | — | — |
 | Fase 4: Upload de Documentos | 🔴 Não iniciada | — | — |
 | Fase 5: Workflow — Máquina de Estados | 🔴 Não iniciada | — | — |
@@ -169,6 +171,7 @@ Sistema de tramitação de documentos e processos administrativos — presente e
 | 3 | 2026-06-28 | Dockerfile multi-stage (Maven build + JRE runtime) | Imagem final mais leve (~200MB vs ~500MB), separa responsabilidades de build e execução, padrão de mercado para apps Spring Boot | Dockerfile single-stage com JDK completo, build local + copy do jar |
 | 4 | 2026-06-28 | Thymeleaf como camada web (Fase 13) | Mesma stack Java, baixa curva de aprendizado, ideal para sistemas administrativos internos. Preparação para realidade de IFES onde não há cargo dedicado de frontend | React, Angular, Vue (overkill para sistemas internos simples) |
 | 5 | 2026-06-29 | Exceções customizadas + `@ControllerAdvice` | Service 100% desacoplado de HTTP (não importa `org.springframework.web`). Exceções de negócio puras traduzidas em respostas HTTP pelo `GlobalExceptionHandler` | `ResponseStatusException` no Service (acopla ao protocolo HTTP) |
+| 6 | 2026-07-01 | Pausa estratégica: Fundamentos antes da Fase 3 | Fase 3 (Spring Security) exige base sólida em Java, OOP, SOLID e Patterns. Estudar fundamentos no próprio código do SISPROT (Modo Revisão) antes de avançar para conceitos mais complexos | Continuar direto para Fase 3 sem base teórica sólida |
 
 ---
 

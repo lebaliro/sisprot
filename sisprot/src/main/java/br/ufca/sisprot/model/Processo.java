@@ -42,7 +42,7 @@ public class Processo {
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
 
-    @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "processo")
     @JsonIgnore // Evita loop infinito na serialização JSON
     @ToString.Exclude // Evita loop infinito no toString
     @EqualsAndHashCode.Exclude // Evita loop infinito no equals/hashCode

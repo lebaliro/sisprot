@@ -60,8 +60,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidacao(MethodArgumentNotValidException ex) {
         Map<String, String> errosCampos = new HashMap<>();
+
+        // Erros de campo (ex: @NotBlank, @Size, @DataNaoFutura)
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errosCampos.put(error.getField(), error.getDefaultMessage())
+        );
+
+        // Erros de classe (ex: @SetoresDiferentes)
+        ex.getBindingResult().getGlobalErrors().forEach(error ->
+                errosCampos.put("geral", error.getDefaultMessage())
         );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
